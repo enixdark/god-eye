@@ -31,6 +31,8 @@ Mỗi check phải có time out.
 
 ### 4. Upload Result:
 After run checks, agent send each result to MetricsDB.
+> cái này có cần lập lịch gửi. hay là có bao nhiêu thì gửi bấy nhiêu?
+Nếu lập lịch thì cần thêm config option: `upload_interval`
 
 
 ### 5. Dynamic Plugins Patterns:
@@ -70,7 +72,7 @@ Dựa vào use case ta có các option:
     ├── Makefile
     ├── setup.py
     ├── middleware.py
-    ├── Agent
+    ├── godeye_agent
     │   ├── agent.py
     │   ├── config.py
     │   ├── webservercontroller.py
