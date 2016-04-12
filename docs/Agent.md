@@ -1,4 +1,4 @@
-## Change Log
+## Change Logs
 
 - v0.0.1:
 > mục tiêu là cho phần scheduling chạy với 1 check đơn giản được
