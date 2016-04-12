@@ -1,7 +1,8 @@
 ### Documents
 [Agent](https://github.com/PiScale/god-eye/blob/agent/docs/Agent.md)
 
-[Proposal](https://github.com/PiScale/god-eye/blob/new/docs/Agent-proposal.md)
+[Proposal](https://github.com/PiScale/god-eye/blob/agent/docs/Agent-proposal.md)
+
 
 ### How to run?
 > Python3.5 nhe =)))
