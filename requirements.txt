@@ -1,0 +1,4 @@
+asyncio
+apscheduler==3.0.6
+aiohttp>=0.21.5
+rx
