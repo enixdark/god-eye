@@ -29,6 +29,7 @@ class AbstractCheckPlugin(metaclass=ABCMeta):
     def get_result(self, result):
         """
         nơi implement tính toán
+
         :param result:
         :return:
         """

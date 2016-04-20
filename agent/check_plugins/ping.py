@@ -18,7 +18,7 @@ class Ping(AbstractCheckPlugin):
     @asyncio.coroutine
     def get_result(self, result):
         """
-        Vi du
+        Vi du cho Dai
         :param result:
         :return:
         """
