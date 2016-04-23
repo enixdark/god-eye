@@ -18,7 +18,7 @@ class Download(AbstractCheckPlugin):
     def __call__(self, client, node_target):
         logger.info('Test download speed :  running...')
         result = yield from self.get_result(node_target)
-        yield from self._queue.put(self.get_result(text))
+        yield from self._queue.put(result)
 
     @asyncio.coroutine
     def get_result(self, result):
