@@ -16,7 +16,7 @@ class FirstByte(AbstractCheckPlugin):
 
     @asyncio.coroutine
     def __call__(self, client, node_target):
-        logger.info('Test download speed :  running...')
+        logger.info('Caculating time for download first byte...')
         result = yield from self.get_result(node_target)
         yield from self._queue.put(result)
 
@@ -34,13 +34,13 @@ class FirstByte(AbstractCheckPlugin):
         start_chunk = time.clock()
         for chunk in r.iter_content(1024): # 1kB1024 1MB 1048576
           end_chunk = time.clock()
+          break
         
         delta = end_chunk - start_chunk # time to first byte
-          start_chunk = end_chunk
         if delta <= 0:
           return None
         else:
-          logger.info("Test download speed done!")
-          return [download_speed, mean_deviation, acceleration, str(datetime.now())]
+          logger.info("Caculation time for download first byte done!")
+          return [delta, str(datetime.now())]
            
       
