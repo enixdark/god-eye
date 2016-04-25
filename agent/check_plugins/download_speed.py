@@ -49,8 +49,8 @@ class Download(AbstractCheckPlugin):
         download_speed = total_length // (time.clock() - start)
         acceleration = self.acceleration(array_speed)
         mean_deviation = self.mean_deviation(array_speed, download_speed)
-      logger.info("Test download speed done!")
-      return [download_speed, mean_deviation, acceleration, str(datetime.now())]
+        logger.info("Test download speed done!")
+        return [download_speed, mean_deviation, acceleration, str(datetime.now())]
 
     def acceleration(array_speed):
       if len(array_speed) == 0:
