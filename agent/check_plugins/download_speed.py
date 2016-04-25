@@ -30,8 +30,8 @@ class Download(AbstractCheckPlugin):
       r = requests.get(url, stream=True)
       total_length = int(r.headers.get('content-length'))
       if total_length is None:
-        logger.info("Test download speed : done!")
-        pass
+        logger.info("Empty file!")
+        return None
       else:
         array_speed = []
         start_chunk = time.clock()
@@ -40,7 +40,7 @@ class Download(AbstractCheckPlugin):
           delta = end_chunk - start_chunk
           start_chunk = end_chunk
           if delta <= 0:
-            pass
+            return None
           else:
              array_speed.append(1//delta) # kB / s
         print array_speed
