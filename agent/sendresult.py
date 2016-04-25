@@ -26,5 +26,4 @@ class SendResult(object):
                 logger.info(result)
                 # CHo nay Kien viet ham gui data....
 
-
                 # client.post(config.db_url, data=result)

@@ -22,11 +22,8 @@ class Ping(AbstractCheckPlugin):
         :param result:
         :return:
         """
-        logger.info("Ham get result")
+        logger.info("Ham get result: {}".format(result))
         return result
-
-
-
 
 # Fast test =)))
 # if __name__ == '__main__':
@@ -36,7 +33,8 @@ class Ping(AbstractCheckPlugin):
 #     print(x)
 #     print('Press Ctrl+C to exit')
 #
-#     # Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
+#     # Execution will block here until Ctrl+C
+#     # (Ctrl+Break on Windows) is pressed.
 #     try:
 #         loop.run_forever()
 #     except (KeyboardInterrupt, SystemExit):
