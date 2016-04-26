@@ -7,7 +7,7 @@ flake:
 	flake8 agent tests
 
 test:
-	python3 -m "nose" -s $(FLAGS) ./tests/
+	python3.5 -m "nose" -s $(FLAGS) ./tests/
 
 vtest: flake develop
 	nosetests --exe python3 -s -v $(FLAGS) ./tests/
