@@ -7,10 +7,10 @@ flake:
 	flake8 agent tests
 
 test:
-	nosetests -s $(FLAGS) ./tests/
+	python3 -m "nose" -s $(FLAGS) ./tests/
 
 vtest: flake develop
-	nosetests -s -v $(FLAGS) ./tests/
+	nosetests --exe python3 -s -v $(FLAGS) ./tests/
 
 cov cover coverage: flake
 	@coverage erase
