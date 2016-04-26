@@ -25,7 +25,7 @@ class AbstractCheckPlugin(metaclass=ABCMeta):
 
     @asyncio.coroutine
     @abstractmethod
-    def get_result(self, result):
+    def get_result(self, *args, **kwargs):
         """
         nơi implement tính toán
 
