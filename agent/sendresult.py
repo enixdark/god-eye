@@ -10,7 +10,7 @@ class SendResult(object):
 
     def __init__(self, queue):
         self._queue = queue
-        self.client = Connector.get_client()
+        self.client = InfluxDBHandler.get_client()
 
     @asyncio.coroutine
     def __call__(self):
@@ -19,21 +19,20 @@ class SendResult(object):
 
         :return:
         """
-
-        # Neu Kien ko dung client cua aiohttp thi ko can dung dong nay.
-        # with aiohttp.ClientSession() as client:
         while True:
             cor_result = yield from self._queue.get()
             result = yield from cor_result
             logger.info(result)
-            if self.client is not None:
+            try:
+                logger.info(
+                    "Connected to InfluxDB. Writing data to database...")
                 self.client.write_points(result)
-            else:
-                raise Exception(
-                    "We get some problems with database connection")
+            except:
+                logging.exception(
+                    "We get some problems when write points to database")
 
 
-class Connector(object):
+class InfluxDBHandler(object):
 
     def __init__(self):
         self.host = config.INFLUXDB_HOST
@@ -45,8 +44,9 @@ class Connector(object):
     def get_client(self):
         client = None
         try:
+            logging.info("Connecting to InfluxDB...")
             client = InfluxDBClient(self.host, self.port, self.username,
                                     self.password, self.database)
-        except Exception as err:
-            print("Connect to InfluxDB failed, due to: ", err)
+        except:
+            logging.exception("Connect to InfuxDB is failed!")
         return client
