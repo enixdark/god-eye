@@ -7,6 +7,8 @@ from agent.networkchecker import NetworkChecker
 import aiohttp
 # from datetime import datetime
 from agent.sendresult import SendResult
+from serfclient.client import SerfClient
+
 
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -32,9 +34,11 @@ class Agent(object):
         self.network_checker = NetworkChecker(_client, _loop, _queue)
         self.scheduler = AsyncIOScheduler()
         self._add_job(_client)
+
+        self._serf_client = SerfClient()
         # hard list node for v0.0.1
-        self._hard_list_node = ['http://127.0.0.1:8080/',
-                                'http://httpbin.org/get']
+        # self._hard_list_node = ['http://127.0.0.1:8080/',
+        #                         'http://httpbin.org/get']
         self._list_node = []
 
     def _add_job(self, _client):
@@ -55,7 +59,10 @@ class Agent(object):
         try:
             return self._list_node.pop()
         except IndexError:
-            self._list_node = self._hard_list_node[:]
+            # self._list_node = self._hard_list_node[:]
+            response = self._serf_client.members()
+            self._list_node = ['http://{}'.format(x[b'Addr'].decode())
+                               for x in response.body[b'Members']]
             return self._get_node()
 
 
