@@ -61,7 +61,8 @@ class Agent(object):
         except IndexError:
             # self._list_node = self._hard_list_node[:]
             response = self._serf_client.members()
-            self._list_node = ['http://{}'.format(x[b'Addr'].decode()) for x in response.body[b'Members']]
+            self._list_node = ['http://{}'.format(x[b'Addr'].decode())
+                               for x in response.body[b'Members']]
             return self._get_node()
 
 
