@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class AbstractNetworkChecker(metaclass=ABCMeta):
-
     def __init__(self, client, loop, queue):
         self._plugins = []
         self._client = client
@@ -18,6 +17,8 @@ class AbstractNetworkChecker(metaclass=ABCMeta):
 
         # cai nay de duoi cung
         self._load_plugins()
+
+
 
     def _load_plugins(self):
         for check in config.enable_plugin:
@@ -33,6 +34,7 @@ class AbstractNetworkChecker(metaclass=ABCMeta):
 
             if plugin:
                 self._plugins.append(plugin)
+
 
     def _load_plugin(self, name, path, **kwarg):
         plugin = importlib.import_module(path, __name__)
@@ -52,16 +54,14 @@ class AbstractNetworkChecker(metaclass=ABCMeta):
         raise Exception('No Plugin')
 
 
-class NetworkChecker(AbstractNetworkChecker):
 
+class NetworkChecker(AbstractNetworkChecker):
     def __call__(self, get_node):
         logger.info('Network checker start running')
         dnode = get_node()
-        future = asyncio.run_coroutine_threadsafe(
-            self.real_call(dnode), self._loop)
+        future = asyncio.run_coroutine_threadsafe(self.real_call(dnode), self._loop)
         try:
-            # Wait for the result with a timeout
-            result = future.result(config.check_timeout)
+            result = future.result(config.check_timeout)  # Wait for the result with a timeout
         except asyncio.TimeoutError:
             logger.info('The coroutine took too long, cancelling the task...')
             future.cancel()
